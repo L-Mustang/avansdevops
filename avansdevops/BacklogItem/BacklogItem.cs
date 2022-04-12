@@ -22,7 +22,9 @@ namespace avansdevops.BacklogItem
 		private int _backlogItemId { get; set; }
 		private string _title { get; set; }
 
-		public BacklogItem(int backlogItemId, string title)
+		private int _userId { get; set; }
+
+		public BacklogItem(int backlogItemId, string title, int userId)
 		{
 
 			this._stateDone = new BacklogItemStateDone(this);
@@ -35,6 +37,7 @@ namespace avansdevops.BacklogItem
 
 			this._backlogItemId = backlogItemId;
 			this._title = title;
+			this._userId = userId;
 		}
 
 		public void SetState(IBacklogItemState state)
@@ -47,6 +50,9 @@ namespace avansdevops.BacklogItem
 			return this._state;
 	
 		}
-
+		public void SetUser(int userId)
+        {
+			_userId = userId;
+        }
 	}
 }
