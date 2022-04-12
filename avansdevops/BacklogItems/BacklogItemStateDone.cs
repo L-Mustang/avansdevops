@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace avansdevops.BacklogItem
+namespace avansdevops.BacklogItems
 {
 	public class BacklogItemStateDone : IBacklogItemState
 	{
-		private BacklogItemStateDone _backlogItem;
+		private BacklogItem _backlogItem;
 
 		public BacklogItemStateDone(BacklogItem backlogItem)
 		{

@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace avansdevops.BacklogItem
+namespace avansdevops.BacklogItems
 {
-    internal class BacklogItemStateTesting : IBacklogItemState
+    internal class BacklogItemStateDoing : IBacklogItemState
     {
         private BacklogItem _backlogItem;
 
-        public BacklogItemStateTesting(BacklogItem backlogItem)
+        public BacklogItemStateDoing(BacklogItem backlogItem)
         {
             this._backlogItem = backlogItem;
         }

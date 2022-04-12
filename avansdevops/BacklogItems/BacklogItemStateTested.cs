@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace avansdevops.BacklogItem
+namespace avansdevops.BacklogItems
 {
     internal class BacklogItemStateTested : IBacklogItemState
     {

@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 
-namespace avansdevops.BacklogItem
+namespace avansdevops.BacklogItems
 {
 	public interface IBacklogItemState
 	{
