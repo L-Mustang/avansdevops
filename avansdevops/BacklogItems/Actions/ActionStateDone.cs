@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace avansdevops.BacklogItem.Actions
+namespace avansdevops.BacklogItems.Actions
 {
     internal class ActionStateDone : IActionState
     {
