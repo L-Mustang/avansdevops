@@ -8,6 +8,13 @@ namespace avansdevops
 {
     public class Project
     {
-        private ProductBacklog 
+        private ProductBacklog _productBacklog;
+        private Forum _forum;
+
+        public Project()
+        {
+            _productBacklog = new ProductBacklog();
+            _forum = new Forum();
+        }
     }
 }

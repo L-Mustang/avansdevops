@@ -10,7 +10,7 @@ namespace avansdevops
     {
         private List<ForumThread> _threads;
 
-        public Forum(int id, string name)
+        public Forum()
         {
             _threads = new List<ForumThread>();
         }
