@@ -20,6 +20,8 @@ namespace avansdevops.BacklogItems
         private IBacklogItemState _state;
         private List<Action>? _actions;
 
+        public BacklogItemManager _backlogItemManager;
+
         private int _backlogItemId { get; set; }
         private string _title { get; set; }
 
@@ -38,6 +40,8 @@ namespace avansdevops.BacklogItems
             this._backlogItemId = backlogItemId;
             this._title = title;
 
+            this._backlogItemManager = new BacklogItemManager();
+
             _actions = new List<Action>();
 
             if (userId != null)
@@ -49,6 +53,7 @@ namespace avansdevops.BacklogItems
         public void SetState(IBacklogItemState state)
         {
             this._state = state;
+            _backlogItemManager.BacklogItemStateChanged(this);
         }
 
         public IBacklogItemState GetState()

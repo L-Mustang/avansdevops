@@ -15,6 +15,8 @@ namespace avansdevops
         private List<IUser> _users;
         private bool _active;
 
+
+        public SprintManager _sprintManager;
         private ISprintStrategy _strategy;
 
         public Sprint(ISprintStrategy strategy)
@@ -24,6 +26,7 @@ namespace avansdevops
             _users = new List<IUser>();
 
             _strategy = strategy;
+            _sprintManager = new SprintManager();
         }
 
         public List<BacklogItem> GetAllBacklogItems()
@@ -76,6 +79,17 @@ namespace avansdevops
         public ISprintStrategy GetStrategy()
         {
             return _strategy;
+        }
+
+        public bool GetStatus()
+        {
+            return _active;
+        }
+
+        public void setStatus(bool status)
+        {
+            _active = status;
+            _sprintManager.SprintChanged(this);            
         }
     }
 }
