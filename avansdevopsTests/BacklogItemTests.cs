@@ -28,26 +28,34 @@ namespace avansdevopsTests
             int id = 1;
             
             // Act
-            BacklogItem backlogItem = new BacklogItem(id, title, null);
+            BacklogItem backlogItem = new BacklogItem(id, title, 1);
 
             // Assert
-            backlogItem.Should().BeEquivalentTo(testItem1);
-            
+            backlogItem.GetTitle().Should().Be(title);
         }
 
         [TestMethod]
         public void Test_BacklogItemSetState()
         {
             // Arrange
-            string title = "Testitem123";
-            int id = 1;
-            BacklogItem backlogItem = new BacklogItem(id, title, null);
 
             // Act
-            backlogItem.SetState(backlogItem.GetStateDoing());
+            testItem2.SetState(testItem2.GetStateDoing());
 
             // Assert
-            backlogItem.Should().NotBeEquivalentTo(testItem2);
+            testItem2.GetState().Should().BeOfType<BacklogItemStateDoing>();
+        }
+
+        [TestMethod]
+        public void Test_BacklogItemSetStateFail()
+        {
+            // Arrange
+
+            // Act
+            testItem2.SetState(testItem2.GetStateDoing());
+
+            // Assert
+            testItem2.GetState().Should().NotBeOfType<BacklogItemStateTodo>();
         }
     }
 }
