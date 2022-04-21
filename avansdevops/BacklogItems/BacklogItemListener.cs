@@ -4,22 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using avansdevops.BacklogItems;
+using avansdevops.Notifications;
 
 namespace avansdevops.BacklogItems;
 
 public class BacklogItemListener : IObserver<BacklogItem>
 {
-    private IDisposable? unsubscriber;
-    public string? message;
+    private IDisposable? _unsubscriber;
+    public string? _message;
 
     public virtual void Subscribe(IObservable<BacklogItem> manager)
     {
-        unsubscriber = manager.Subscribe(this);
+        _unsubscriber = manager.Subscribe(this);
     }
 
     public virtual void Unsubscribe()
     {
-        unsubscriber?.Dispose();
+        _unsubscriber?.Dispose();
     }
 
     public virtual void OnCompleted()
@@ -34,6 +35,11 @@ public class BacklogItemListener : IObserver<BacklogItem>
 
     public virtual void OnNext(BacklogItem backlogItem)
     {
-        this.message = $"Your item has been set to {backlogItem.GetState()}";
+        _message = $"Your item has been set to {backlogItem.GetState()}";
+        INotificationAdapter notificationServiceSmtp = new SmtpAdapter(new Lib.SMTP());
+        INotificationAdapter notificationServiceSlack = new SlackAdapter(new Lib.SlackAPI());
+
+        notificationServiceSlack.SendNotification(_message);
+        notificationServiceSmtp.SendNotification(_message);
     }
 }
