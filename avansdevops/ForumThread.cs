@@ -28,5 +28,10 @@ namespace avansdevops
                 _posts.Add(post);
             }
         }
+
+        public List<ForumPost> GetPosts()
+        {
+            return _posts;
+        }
     }
 }

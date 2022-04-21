@@ -22,5 +22,10 @@ namespace avansdevops
                 _threads.Add(thread);
             }
         }
+
+        public List<ForumThread> GetThreads()
+        {
+            return _threads;
+        }
     }
 }
