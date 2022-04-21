@@ -6,25 +6,26 @@ using System.Threading.Tasks;
 
 namespace avansdevops.Lib
 {
-    public class WordAPI
+    public class WordAPI : IDocx
     {
-        private string _extension;
+        private string _rawText;
         
-        public WordAPI(string extension)
+        public WordAPI(string rawText)
         {
-            _extension = extension;
+            _rawText = rawText;
         }
 
-        public string Extension
+        public string RawText
         {
-            get { return _extension; }
-            set { _extension = value; }
+            get { return _rawText; }
+            set { _rawText = value; }
         }
 
-        public void SaveDocx(string fileName, string text)
+        public bool ExportToDocx()
         {
-            Console.Out.WriteLine("Saving to file: {0}.{1}", fileName, _extension);
+            Console.Out.WriteLine("Docx:");
             Console.Out.WriteLine(text);
+            return true;
         }
     }
 }

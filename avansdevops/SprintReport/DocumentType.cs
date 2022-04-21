@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace avansdevops.Lib
+namespace avansdevops.SprintReport
 {
-    public interface IDocx
+    public enum DocumentType
     {
-        string RawText { get; set; }
-
-        bool ExportToDocx ();
+        Docx,
+        PDF,
     }
 }
