@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace avansdevops.BacklogItems.Actions
 {
-    internal class ActionStateDone : IActionState
+    public class ActionStateDone : IActionState
     {
         private Action _action;
 

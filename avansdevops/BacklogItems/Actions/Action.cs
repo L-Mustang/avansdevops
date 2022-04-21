@@ -43,7 +43,16 @@ namespace avansdevops.BacklogItems.Actions
         {
             return this._state;
         }
-    }
 
-    
+        public IActionState GetStateDone()
+        {
+            return _stateDone;
+        }
+
+        public IActionState GetStateTodo()
+        {
+            return _stateTodo;
+        }
+
+    }    
 }

@@ -43,20 +43,5 @@ namespace avansdevops.DevOps
         {
             return _name;
         }
-
-        public string? ToString()
-        {
-            return base.ToString();
-        }
-
-        public override bool Equals(object? obj)
-        {
-            if (obj is Repository)
-            {
-                var that = obj as Repository;
-                return _name == that._name;
-            }
-            return false;
-        }
     }
 }
