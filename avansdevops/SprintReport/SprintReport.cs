@@ -31,7 +31,7 @@ namespace avansdevops.SprintReport
                     Document = new DocxAdapter(new WordAPI(SprintString));
                     break;
                 default:
-                    Document = new DocxAdapter(new WordAPI(SprintString));
+                    return false;
                     break;
             }
             return Document.Export();
