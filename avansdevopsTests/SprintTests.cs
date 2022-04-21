@@ -3,6 +3,7 @@ using avansdevops;
 using avansdevops.SprintStrategy;
 using avansdevops.User;
 using FluentAssertions;
+using avansdevops.BacklogItems;
 
 namespace avansdevopsTests
 {
@@ -15,6 +16,8 @@ namespace avansdevopsTests
         UserFactory? factory;
         IUser? user;
 
+        BacklogItem backlogItem;
+
         [TestInitialize()]
         public void Startup()
         {
@@ -23,6 +26,8 @@ namespace avansdevopsTests
 
             factory = new DeveloperFactory("Jan", "Jantjes", "mail@mail.com");
             user = factory.CreateUser();
+
+            backlogItem = new BacklogItem(1, "Writing main", 1);
         }
 
         [TestMethod]
@@ -91,6 +96,40 @@ namespace avansdevopsTests
             sprintFeedback.RemoveUser(user);
             // Assert
             sprintFeedback.GetAllUsers().Count.Should().Be(0);
+        }
+
+        [TestMethod]
+        public void Test_SprintAddBacklogItem_GetAllBacklogItem()
+        {
+            // Arrange
+            // Act
+            sprintFeedback.AddBacklogItem(backlogItem);
+            // Assert
+            sprintFeedback.GetAllBacklogItems()[0].Should().Be(backlogItem);
+        }
+
+        [TestMethod]
+        public void Test_SprintRemoveBacklogItem()
+        {
+            // Arrange
+            // Act
+            sprintFeedback.AddBacklogItem(backlogItem);
+            sprintFeedback.RemoveBacklogItem(backlogItem);
+            // Assert
+            sprintFeedback.GetAllBacklogItems().Count.Should().Be(0);
+        }
+
+        [TestMethod]
+        public void Test_SprintSetBacklogItemState()
+        {
+            // Arrange
+            // Act
+            sprintFeedback.AddBacklogItem(backlogItem);
+            // Act
+            backlogItem.SetState(backlogItem.GetStateDoing());
+
+            // Assert
+            sprintFeedback.GetAllBacklogItems()[0].GetState().Should().BeOfType<BacklogItemStateDoing>();
         }
     }
 }
