@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using avansdevops.Notifications;
 
 namespace avansdevops
 {
     public class SprintListener : IObserver<Sprint>
     {
-        private IDisposable? unsubscriber;
-        public string? message;
+        private IDisposable? _unsubscriber;
+        public string? _message;
 
         public virtual void Subscribe(IObservable<Sprint> manager)
         {
-            unsubscriber = manager.Subscribe(this);
+            _unsubscriber = manager.Subscribe(this);
         }
 
         public virtual void Unsubscribe()
         {
-            unsubscriber?.Dispose();
+            _unsubscriber?.Dispose();
         }
 
         public virtual void OnCompleted()
@@ -33,7 +34,13 @@ namespace avansdevops
 
         public virtual void OnNext(Sprint sprint)
         {
-            this.message = $"Your sprint has been set to {sprint.GetStatus}";
+            _message = $"Your sprint has been set to {sprint.GetStatus}";
+            INotificationAdapter notificationServiceSmtp = new SmtpAdapter(new Lib.SMTP());
+            INotificationAdapter notificationServiceSlack = new SlackAdapter(new Lib.SlackAPI());
+
+            notificationServiceSlack.SendNotification(_message);
+            notificationServiceSmtp.SendNotification(_message);
+
         }
     }
 }
