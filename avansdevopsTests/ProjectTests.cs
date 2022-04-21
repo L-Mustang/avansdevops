@@ -33,7 +33,7 @@ namespace avansdevopsTests
             project.AddSprint(sprintStrategy);
 
             // Assert
-            Assert.AreEqual(sprint, project.GetSprint());
+            Assert.IsNotNull(project.GetSprint());
         }
 
         [TestMethod]
