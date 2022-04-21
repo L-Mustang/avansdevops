@@ -70,12 +70,7 @@ namespace avansdevops
         {
             return _users.Find(x => x.FullName == fullName);
         }
-
-        public void FinishSprint()
-        {
-            _active = false;
-        }
-
+        
         public ISprintStrategy GetStrategy()
         {
             return _strategy;
