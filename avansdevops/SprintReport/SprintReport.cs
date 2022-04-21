@@ -1,4 +1,5 @@
-﻿using System;
+﻿using avansdevops.Lib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +9,10 @@ namespace avansdevops.SprintReport
 {
     public class SprintReport
     {
-        private string _sprint;
+        private Sprint _sprint;
         private DocumentType _documentType;
-        //TODO Add sprints
 
-        public SprintReport(string sprint, DocumentType documentType)
+        public SprintReport(Sprint sprint, DocumentType documentType)
         {
             _sprint = sprint;
             _documentType = documentType;
@@ -20,15 +20,21 @@ namespace avansdevops.SprintReport
 
         public bool createReportDocument()
         {
+            IDocument Document;
+            string SprintString = _sprint.ToString();
             switch (_documentType)
             {
                 case DocumentType.Docx:
-                    return true;
+                    Document = new DocxAdapter(new WordAPI(SprintString));
+                    break;
                 case DocumentType.PDF:
-                    return true;
+                    Document = new DocxAdapter(new WordAPI(SprintString));
+                    break;
                 default:
-                    return false;
+                    Document = new DocxAdapter(new WordAPI(SprintString));
+                    break;
             }
+            return Document.Export();
         }
     }
 }
