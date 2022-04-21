@@ -86,11 +86,5 @@ namespace avansdevops
             _active = status;
             _sprintManager.SprintChanged(this);            
         }
-
-        public override string? ToString()
-        {
-            return base.ToString();
-        }
-
     }
 }
