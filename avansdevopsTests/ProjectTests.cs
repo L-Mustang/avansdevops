@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using avansdevops;
+using avansdevops.SprintStrategy;
 
 namespace avansdevopsTests
 {
@@ -7,15 +8,51 @@ namespace avansdevopsTests
     public class ProjectTests
     {
         [TestMethod]
-        public void CreateProject()
+        public void Test_CreateProject()
         {
-            //Arrange
+            // Arrange
             Project project = new Project();
 
-            //Act
+            // Act
 
-            //Assert
+            // Assert
             Assert.IsNotNull(project);
         }
+
+        [TestMethod]
+        public void Test_AddSprint()
+        {
+            // Arrange
+            Project project = new Project();
+
+            ISprintStrategy sprintStrategy = new SprintStrategyFeedback();
+            Sprint sprint = new Sprint(sprintStrategy);
+
+            // Act
+            project.AddSprint(sprintStrategy);
+
+            // Assert
+            Assert.ReferenceEquals(sprint, project.GetSprint());
+        }
+
+        //[TestMethod]
+        //public void Test_()
+        //{
+        //    // Arrange
+
+        //    // Act
+
+        //    // Assert
+        //}
+
+        //[TestMethod]
+        //public void Test_()
+        //{
+        //    // Arrange
+
+        //    // Act
+
+        //    // Assert
+        //}
     }
 }
