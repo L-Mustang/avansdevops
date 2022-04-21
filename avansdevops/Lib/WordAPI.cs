@@ -24,7 +24,7 @@ namespace avansdevops.Lib
         public bool ExportToDocx()
         {
             Console.Out.WriteLine("Docx:");
-            Console.Out.WriteLine(text);
+            Console.Out.WriteLine(_rawText);
             return true;
         }
     }

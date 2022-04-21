@@ -24,7 +24,7 @@ namespace avansdevops.SprintReport
 
         public bool Export()
         {
-            return _docx.ExportToDocx()
+            return _docx.ExportToDocx();
         }
     }
 }
