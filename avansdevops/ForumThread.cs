@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using avansdevops.BacklogItems;
 
 namespace avansdevops
 {
-    public class ForumTread
+    public class ForumThread
     {
         private List<ForumPost> _posts;
-        private BacklogItem _backlogItem
+        private BacklogItem _backlogItem;
         private string _title;
 
         public ForumThread(string title, BacklogItem backlogItem)
