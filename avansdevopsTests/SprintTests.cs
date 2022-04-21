@@ -36,5 +36,14 @@ namespace avansdevopsTests
             // Assert
             sprintRelease.GetStrategy().Should().BeOfType<SprintStrategyRelease>();
         }
+
+        [TestMethod]
+        public void Test_SprintSetStatus()
+        {
+            // Arrange
+            // Act
+            sprintFeedback.SetStatus(true);
+            // Assert
+        }
     }
 }

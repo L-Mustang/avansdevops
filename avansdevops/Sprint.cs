@@ -81,7 +81,7 @@ namespace avansdevops
             return _active;
         }
 
-        public void setStatus(bool status)
+        public void SetStatus(bool status)
         {
             _active = status;
             _sprintManager.SprintChanged(this);            
