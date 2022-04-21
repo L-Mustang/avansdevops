@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace avansdevops.BacklogItems
 {
-    internal class BacklogItemStateTesting : IBacklogItemState
+    public class BacklogItemStateTesting : IBacklogItemState
     {
         private BacklogItem _backlogItem;
 
