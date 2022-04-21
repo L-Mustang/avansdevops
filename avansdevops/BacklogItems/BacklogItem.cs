@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+﻿using avansdevops.BacklogItems.Actions;
 
 namespace avansdevops.BacklogItems
 {
@@ -18,7 +12,7 @@ namespace avansdevops.BacklogItems
         private IBacklogItemState _stateTodo;
 
         private IBacklogItemState _state;
-        private List<Action>? _actions;
+        private List<Actions.Action>? _actions;
 
         public BacklogItemManager _backlogItemManager;
 
@@ -42,7 +36,7 @@ namespace avansdevops.BacklogItems
 
             this._backlogItemManager = new BacklogItemManager();
 
-            _actions = new List<Action>();
+            _actions = new List<Actions.Action>();
 
             if (userId != null)
             {
@@ -61,7 +55,7 @@ namespace avansdevops.BacklogItems
             return this._state;
         }
 
-        public void AddAction(Action action)
+        public void AddAction(Actions.Action action)
         {
             if(action != null)
             {
@@ -69,7 +63,7 @@ namespace avansdevops.BacklogItems
             }
         }
 
-        public void RemoveAction(Action action)
+        public void RemoveAction(Actions.Action action)
         {
             try
             {
@@ -82,6 +76,11 @@ namespace avansdevops.BacklogItems
             {
                 Console.WriteLine(ex.ToString());
             }            
+        }
+
+        public List<Actions.Action> GetActions()
+        {
+            return _actions;
         }
 
         public string GetTitle()
