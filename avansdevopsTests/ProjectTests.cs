@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using avansdevops;
 using avansdevops.SprintStrategy;
+using avansdevops.DevOps;
 
 namespace avansdevopsTests
 {
@@ -32,27 +33,22 @@ namespace avansdevopsTests
             project.AddSprint(sprintStrategy);
 
             // Assert
-            Assert.ReferenceEquals(sprint, project.GetSprint());
+            Assert.AreEqual(sprint, project.GetSprint());
         }
 
-        //[TestMethod]
-        //public void Test_()
-        //{
-        //    // Arrange
+        [TestMethod]
+        public void Test_AddRepository()
+        {
+            // Arrange
+            Project project = new Project();
+            Repository repo = new Repository("testing123");
 
-        //    // Act
+            // Act
+            project.AddRepository("testing123");
 
-        //    // Assert
-        //}
+            // Assert
+            Assert.AreEqual(repo, project.GetRepository());
+        }
 
-        //[TestMethod]
-        //public void Test_()
-        //{
-        //    // Arrange
-
-        //    // Act
-
-        //    // Assert
-        //}
     }
 }

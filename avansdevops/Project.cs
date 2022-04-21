@@ -31,6 +31,11 @@ namespace avansdevops
             _repo = new Repository(name);
         }
 
+        public Repository GetRepository()
+        {
+            return _repo;
+        }
+
         public Sprint GetSprint()
         {
             return _sprint;
