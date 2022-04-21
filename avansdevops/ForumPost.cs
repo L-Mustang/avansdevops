@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
 
 namespace avansdevops
 {
@@ -18,7 +19,7 @@ namespace avansdevops
             _content = content;
             _userId = userId;
 
-            _id = new Random().Next();
+            _id = _id = RandomNumberGenerator.GetInt32(int.MaxValue);
 
         }
     }
