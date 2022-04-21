@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using avansdevops.DevOps.Testers;
 
 namespace avansdevops.DevOps
 {
@@ -25,10 +26,29 @@ namespace avansdevops.DevOps
             Console.WriteLine("Deployed");
         }
 
-        public void Test(Branch branch)
+        public void Test(Branch branch, string tester)
         {
-            Console.WriteLine("Testing..");
-            Console.WriteLine("Finished all tests");
+            ITestingAdapter? testingAdapter = null;
+            switch (tester)
+            {
+                case "NUnit":
+                    testingAdapter = new NUnitAdapter(new Lib.NUnit());
+                    Console.WriteLine("Finished all tests");
+                    break;
+
+                case "Selenium":
+                    testingAdapter = new SeleniumAdapter(new Lib.Selenium());
+                    Console.WriteLine("Finished all tests");
+                    break;
+
+                default:
+                    Console.WriteLine("Platform not found");
+                    break;
+            }
+            if (testingAdapter != null)
+            {
+                testingAdapter.Test(branch);
+            }
         }
 
         public void Build(Branch branch, BuildJobType buildJobType)
@@ -61,7 +81,7 @@ namespace avansdevops.DevOps
         public void Analyse(Branch branch)
         {
             Console.WriteLine("Analysing...");
-            Console.WriteLine("Analysis completed. ")
+            Console.WriteLine("Analysis completed. ");
         }
     }
 
