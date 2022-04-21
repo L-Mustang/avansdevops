@@ -2,6 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using avansdevops;
 using avansdevops.SprintStrategy;
 using avansdevops.DevOps;
+using FluentAssertions;
 
 namespace avansdevopsTests
 {
@@ -33,7 +34,7 @@ namespace avansdevopsTests
             project.AddSprint(sprintStrategy);
 
             // Assert
-            Assert.AreEqual(sprint, project.GetSprint());
+            sprint.Should().BeEquivalentTo(project.GetSprint());
         }
 
         [TestMethod]
@@ -47,7 +48,7 @@ namespace avansdevopsTests
             project.AddRepository("testing123");
 
             // Assert
-            Assert.AreEqual(repo, project.GetRepository());
+            repo.GetName().Should().BeEquivalentTo(project.GetRepository().GetName());
         }
 
     }

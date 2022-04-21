@@ -97,14 +97,5 @@ namespace avansdevops
             return base.ToString();
         }
 
-        public override bool Equals(object? obj)
-        {
-            if ( obj is Sprint)
-            {
-                var that = obj as Sprint;
-                return _strategy == that._strategy && _active == that._active;
-            }
-            return false;
-        }
     }
 }

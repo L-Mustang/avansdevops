@@ -52,7 +52,7 @@ namespace avansdevops.BacklogItems
 
         public void SetState(IBacklogItemState state)
         {
-            this._state = state;
+            _state = state;
             _backlogItemManager.BacklogItemStateChanged(this);
         }
 
@@ -82,6 +82,46 @@ namespace avansdevops.BacklogItems
             {
                 Console.WriteLine(ex.ToString());
             }            
+        }
+
+        public string GetTitle()
+        {
+            return _title;
+        }
+
+        public int GetId()
+        {
+            return _backlogItemId;
+        }
+
+        public IBacklogItemState GetStateDone()
+        {
+            return _stateDone;
+        }
+
+        public IBacklogItemState GetStateDoing()
+        {
+            return _stateDoing;
+        }
+
+        public IBacklogItemState GetStateReadyForTesting()
+        {
+            return _stateReadyForTesting;
+        }
+
+        public IBacklogItemState GetStateTesting()
+        {
+            return _stateTesting;
+        }
+
+        public IBacklogItemState GetStateTested()
+        {
+            return _stateTested;
+        }
+
+        public IBacklogItemState GetStateTodo()
+        {
+            return _stateTodo;
         }
     }
 }
