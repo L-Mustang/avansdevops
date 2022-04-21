@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace avansdevops.SprintReport
 {
-    public interface DocumentAdapter
+    public interface IDocument
     {
+        string Text { get; set; }
+
+        bool Export();
     }
 }

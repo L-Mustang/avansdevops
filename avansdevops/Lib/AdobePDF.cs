@@ -6,25 +6,25 @@ using System.Threading.Tasks;
 
 namespace avansdevops.Lib
 {
-    public class AdobePDF
+    public class AdobePDF : IPDF
     {
-        private string _extension;
+        private string _formattedText;
 
-        public WordAPI(string extension)
+        public AdobePDF(string formattedText)
         {
-            _extension = extension;
+            _formattedText = formattedText;
         }
 
-        public string Extension
+        public string FormattedText
         {
-            get { return _extension; }
-            set { _extension = value; }
+            get { return _formattedText; }
+            set { _formattedText = value; }
         }
 
-        public void SavePDF(string fileName, string text, string format)
+        public string ExportToPDF()
         {
-            Console.Out.WriteLine("Saving to file: {0}.{1}", fileName, _extension);
-            Console.Out.WriteLine(text);
+            Console.Out.WriteLine("PDF:");
+            Console.Out.WriteLine(_formattedText);
+            return "Success";
         }
     }
-}

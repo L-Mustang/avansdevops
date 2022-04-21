@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace avansdevops.Lib
 {
-    public interface IDocx
+    public interface IPDF
     {
-        string RawText { get; set; }
+        string FormattedText { get; set; }
 
-        bool ExportToDocx ();
+        string ExportToPDF ();
     }
 }
