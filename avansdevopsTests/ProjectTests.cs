@@ -48,7 +48,7 @@ namespace avansdevopsTests
             project.AddRepository("testing123");
 
             // Assert
-            repo.GetName().Should().BeEquivalentTo(project.GetRepository().GetName());
+            project.GetRepository().GetName().Should().Be(repo.GetName());
         }
 
     }
