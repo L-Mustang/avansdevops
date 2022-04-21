@@ -99,16 +99,12 @@ namespace avansdevops
 
         public override bool Equals(object? obj)
         {
-            // private List<BacklogItem> _backlogItems;
-        //private List<IUser> _users;
-        //private bool _active;
-
             if ( obj is Sprint)
             {
                 var that = obj as Sprint;
                 return _strategy == that._strategy && _active == that._active;
             }
             return false;
-    }
+        }
     }
 }
