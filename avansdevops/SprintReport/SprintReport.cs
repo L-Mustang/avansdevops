@@ -20,21 +20,20 @@ namespace avansdevops.SprintReport
 
         public bool createReportDocument()
         {
-            IDocument Document;
+            IDocument document;
             string sprintString = _sprint.ToString();
             switch (_documentType)
             {
                 case DocumentType.Docx:
-                    Document = new DocxAdapter(new WordAPI(sprintString));
+                    document = new DocxAdapter(new WordAPI(sprintString));
                     break;
                 case DocumentType.PDF:
-                    Document = new PDFAdapter(new AdobePDF(sprintString));
+                    document = new PDFAdapter(new AdobePDF(sprintString));
                     break;
                 default:
                     return false;
-                    break;
             }
-            return Document.Export();
+            return document.Export();
         }
     }
 }
