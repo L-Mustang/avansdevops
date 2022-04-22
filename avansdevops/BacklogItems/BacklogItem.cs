@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+﻿    using avansdevops.BacklogItems.Actions;
 
 namespace avansdevops.BacklogItems
 {
@@ -18,7 +12,7 @@ namespace avansdevops.BacklogItems
         private IBacklogItemState _stateTodo;
 
         private IBacklogItemState _state;
-        private List<Action>? _actions;
+        private List<Actions.Action>? _actions;
 
         public BacklogItemManager _backlogItemManager;
 
@@ -42,17 +36,19 @@ namespace avansdevops.BacklogItems
 
             this._backlogItemManager = new BacklogItemManager();
 
-            _actions = new List<Action>();
+            _actions = new List<Actions.Action>();
 
             if (userId != null)
             {
                 _userId = userId;
             }
+
+            _backlogItemManager.Subscribe(new BacklogItemListener());
         }
 
         public void SetState(IBacklogItemState state)
         {
-            this._state = state;
+            _state = state;
             _backlogItemManager.BacklogItemStateChanged(this);
         }
 
@@ -61,7 +57,7 @@ namespace avansdevops.BacklogItems
             return this._state;
         }
 
-        public void AddAction(Action action)
+        public void AddAction(Actions.Action action)
         {
             if(action != null)
             {
@@ -69,7 +65,7 @@ namespace avansdevops.BacklogItems
             }
         }
 
-        public void RemoveAction(Action action)
+        public void RemoveAction(Actions.Action action)
         {
             try
             {
@@ -82,6 +78,51 @@ namespace avansdevops.BacklogItems
             {
                 Console.WriteLine(ex.ToString());
             }            
+        }
+
+        public List<Actions.Action> GetActions()
+        {
+            return _actions;
+        }
+
+        public string GetTitle()
+        {
+            return _title;
+        }
+
+        public int GetId()
+        {
+            return _backlogItemId;
+        }
+
+        public IBacklogItemState GetStateDone()
+        {
+            return _stateDone;
+        }
+
+        public IBacklogItemState GetStateDoing()
+        {
+            return _stateDoing;
+        }
+
+        public IBacklogItemState GetStateReadyForTesting()
+        {
+            return _stateReadyForTesting;
+        }
+
+        public IBacklogItemState GetStateTesting()
+        {
+            return _stateTesting;
+        }
+
+        public IBacklogItemState GetStateTested()
+        {
+            return _stateTested;
+        }
+
+        public IBacklogItemState GetStateTodo()
+        {
+            return _stateTodo;
         }
     }
 }

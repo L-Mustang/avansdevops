@@ -70,12 +70,7 @@ namespace avansdevops
         {
             return _users.Find(x => x.FullName == fullName);
         }
-
-        public void FinishSprint()
-        {
-            _active = false;
-        }
-
+        
         public ISprintStrategy GetStrategy()
         {
             return _strategy;
@@ -86,15 +81,10 @@ namespace avansdevops
             return _active;
         }
 
-        public void setStatus(bool status)
+        public void SetStatus(bool status)
         {
             _active = status;
             _sprintManager.SprintChanged(this);            
-        }
-
-        public override string? ToString()
-        {
-            return base.ToString();
         }
     }
 }

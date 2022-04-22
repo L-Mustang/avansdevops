@@ -10,10 +10,10 @@ namespace avansdevops
 {
     public class Project
     {
-        private ProductBacklog _productBacklog;
-        private Forum _forum;
+        private ProductBacklog _productBacklog { get; set; }
+        private Forum _forum { get ; set; }
         private Sprint _sprint;
-        private Repository _repo;
+        private Repository _repo { get; set; }
 
         public Project()
         {
@@ -29,6 +29,16 @@ namespace avansdevops
         public void AddRepository(string name)
         {
             _repo = new Repository(name);
+        }
+
+        public Repository GetRepository()
+        {
+            return _repo;
+        }
+
+        public Sprint GetSprint()
+        {
+            return _sprint;
         }
     }
 }
