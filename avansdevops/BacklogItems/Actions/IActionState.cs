@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace avansdevops.BacklogItems.Actions
 {
-    public class IActionState
+    public interface IActionState
     {
     }
 }
