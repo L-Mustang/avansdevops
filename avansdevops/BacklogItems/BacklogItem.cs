@@ -1,4 +1,4 @@
-﻿using avansdevops.BacklogItems.Actions;
+﻿    using avansdevops.BacklogItems.Actions;
 
 namespace avansdevops.BacklogItems
 {
@@ -42,6 +42,8 @@ namespace avansdevops.BacklogItems
             {
                 _userId = userId;
             }
+
+            _backlogItemManager.Subscribe(new BacklogItemListener());
         }
 
         public void SetState(IBacklogItemState state)

@@ -12,16 +12,14 @@ namespace avansdevops.BacklogItems.Actions
         private IActionState _stateTodo;
         private IActionState _state;
 
-        private BacklogItem _backlogItem;
         private int _actionId;
         private string _actionName { get; set; }
 
         private int? _userId;
 
-        public Action(int actionId, BacklogItem backlogItem, string actionName, int? userId)
+        public Action(int actionId, string actionName, int? userId)
         {
             _actionId = actionId;
-            _backlogItem = backlogItem;
             _actionName = actionName;
 
             this._stateDone = new ActionStateDone(this);
