@@ -152,7 +152,6 @@ namespace avansdevopsTests
             // Assert
             //Trace.WriteLine(stringWriter.ToString());
             stringWriter.ToString().Should().ContainAll("sprint", "False", "Smtp", "Slack");
-
         }
     }
 }
