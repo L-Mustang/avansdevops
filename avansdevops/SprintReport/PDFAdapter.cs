@@ -24,7 +24,7 @@ namespace avansdevops.SprintReport
 
         public bool Export()
         {
-            if (_pdf.FormattedText.Equals("Success"))
+            if (_pdf.ExportToPDF().Equals("Success"))
                 return true;
             else return false;
         }
