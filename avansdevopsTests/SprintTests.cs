@@ -4,6 +4,9 @@ using avansdevops.SprintStrategy;
 using avansdevops.User;
 using FluentAssertions;
 using avansdevops.BacklogItems;
+using System.IO;
+using System;
+using System.Diagnostics;
 
 namespace avansdevopsTests
 {
@@ -12,6 +15,8 @@ namespace avansdevopsTests
     {
         Sprint? sprintFeedback;
         Sprint? sprintRelease;
+
+        StringWriter stringWriter;
 
         UserFactory? factory;
         IUser? user;
@@ -23,6 +28,9 @@ namespace avansdevopsTests
         {
             sprintFeedback = new Sprint(new SprintStrategyFeedback());
             sprintRelease = new Sprint(new SprintStrategyRelease());
+
+            stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
 
             factory = new DeveloperFactory("Jan", "Jantjes", "mail@mail.com");
             user = factory.CreateUser();
@@ -130,6 +138,21 @@ namespace avansdevopsTests
 
             // Assert
             sprintFeedback.GetAllBacklogItems()[0].GetState().Should().BeOfType<BacklogItemStateDoing>();
+        }
+
+        [TestMethod]
+        public void Test_SprintListenerSendNotification()
+        {
+            // Arrange
+            sprintFeedback._sprintManager.Subscribe(new SprintListener());
+
+            // Act
+            sprintFeedback.SetStatus(false);
+
+            // Assert
+            //Trace.WriteLine(stringWriter.ToString());
+            stringWriter.ToString().Should().ContainAll("sprint", "False", "Smtp", "Slack");
+
         }
     }
 }

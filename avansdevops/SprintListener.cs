@@ -34,7 +34,7 @@ namespace avansdevops
 
         public virtual void OnNext(Sprint sprint)
         {
-            _message = $"Your sprint has been set to {sprint.GetStatus}";
+            _message = $"Your sprint has been set to {sprint.GetStatus()}";
             INotificationAdapter notificationServiceSmtp = new SmtpAdapter(new Lib.SMTP());
             INotificationAdapter notificationServiceSlack = new SlackAdapter(new Lib.SlackAPI());
 
