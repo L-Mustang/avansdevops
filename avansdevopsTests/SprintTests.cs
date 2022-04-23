@@ -35,7 +35,7 @@ namespace avansdevopsTests
             factory = new DeveloperFactory("Jan", "Jantjes", "mail@mail.com");
             user = factory.CreateUser();
 
-            backlogItem = new BacklogItem(1, "Writing main", 1);
+            backlogItem = new BacklogItem(1, "Writing main", null);
         }
 
         [TestMethod]
