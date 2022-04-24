@@ -58,7 +58,7 @@ public class BacklogItemManager : IManager
 
     public void FinishBacklogItem()
     {
-        foreach (IObserver<Sprint> listener in _listeners)
+        foreach (IObserver<ISprint> listener in _listeners)
             listener.OnCompleted();
 
         _listeners.Clear();

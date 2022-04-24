@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using avansdevops.SprintStrategy;
 using avansdevops.DevOps;
 
 namespace avansdevops
@@ -12,7 +11,7 @@ namespace avansdevops
     {
         private ProductBacklog _productBacklog { get; set; }
         private Forum _forum { get ; set; }
-        private Sprint _sprint;
+        private ISprint _sprint;
         private Repository _repo { get; set; }
 
         public Project()
@@ -21,9 +20,9 @@ namespace avansdevops
             _forum = new Forum();
         }
 
-        public void AddSprint(ISprintStrategy sprintStrat)
+        public void AddSprint(ISprint sprint)
         {
-            _sprint = new Sprint(sprintStrat);
+            _sprint = new FeedbackSprint();
         }
 
         public void AddRepository(string name)
@@ -36,7 +35,7 @@ namespace avansdevops
             return _repo;
         }
 
-        public Sprint GetSprint()
+        public ISprint GetSprint()
         {
             return _sprint;
         }

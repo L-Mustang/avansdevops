@@ -9,10 +9,10 @@ namespace avansdevops.SprintReport
 {
     public class SprintReport
     {
-        private Sprint _sprint;
+        private ISprint _sprint;
         private IDocument _documentAdapter;
 
-        public SprintReport(Sprint sprint, IDocument documentAdapter)
+        public SprintReport(ISprint sprint, IDocument documentAdapter)
         {
             _sprint = sprint;
             _documentAdapter = documentAdapter;

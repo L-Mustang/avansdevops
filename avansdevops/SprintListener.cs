@@ -9,12 +9,12 @@ using avansdevops.User;
 
 namespace avansdevops
 {
-    public class SprintListener : IObserver<Sprint>
+    public class SprintListener : IObserver<ISprint>
     {
         private IDisposable? _unsubscriber;
         public string? _message;
 
-        public virtual void Subscribe(IObservable<Sprint> manager)
+        public virtual void Subscribe(IObservable<ISprint> manager)
         {
             _unsubscriber = manager.Subscribe(this);
         }
@@ -34,7 +34,7 @@ namespace avansdevops
             throw new NotImplementedException();
         }
 
-        public virtual void OnNext(Sprint sprint)
+        public virtual void OnNext(ISprint sprint)
         {
             _message = $"Your sprint has been set to {sprint.GetStatus()}";
             INotificationAdapter notificationServiceSmtp = new SmtpAdapter(new Lib.SMTP());
@@ -45,7 +45,7 @@ namespace avansdevops
 
         }
 
-        public virtual void OnNext(Sprint sprint, IUser user, BacklogItem backlogItem)
+        public virtual void OnNext(ISprint sprint, IUser user, BacklogItem backlogItem)
         {
             _message = $"To {user.GetType().ToString()}; BacklogItem {backlogItem.GetTitle()} has been set to state: {backlogItem.GetState().ToString().Substring(41)}";
             

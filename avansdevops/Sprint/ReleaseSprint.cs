@@ -1,38 +1,29 @@
-﻿using System;
+﻿using avansdevops.BacklogItems;
+using avansdevops.User;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using avansdevops.User;
-using avansdevops.BacklogItems;
-using avansdevops.SprintStrategy;
 
 namespace avansdevops
 {
-    public class Sprint
+    public class ReleaseSprint : ISprint
     {
-        private List<BacklogItem> _backlogItems;
-        private List<IUser> _users;
-        private bool _active;
+        public bool _status { get; set; }
+        public List<BacklogItem> _backlogItems { get; set; }
+        public List<IUser> _users { get; set; }
+        public SprintManager _sprintManager { get; set; }
 
-        public SprintManager _sprintManager;
-        private ISprintStrategy _strategy;
-
-        public Sprint(ISprintStrategy strategy)
+        public ReleaseSprint()
         {
-            _active = true;
+            _status = true;
             _backlogItems = new List<BacklogItem>();
             _users = new List<IUser>();
 
-            _strategy = strategy;
             _sprintManager = new SprintManager();
 
             _sprintManager.Subscribe(new SprintListener());
-        }
-
-        public List<BacklogItem> GetAllBacklogItems()
-        {
-            return _backlogItems;
         }
 
         public List<BacklogItem> AddBacklogItem(BacklogItem backlogItem)
@@ -42,20 +33,15 @@ namespace avansdevops
             return _backlogItems;
         }
 
-        public void RemoveBacklogItem(BacklogItem backlogItem)
-        {
-            _backlogItems.Remove(backlogItem);
-        }
-
         public List<IUser> AddUser(IUser user)
         {
             _users.Add(user);
             return _users;
         }
 
-        public void RemoveUser(IUser user)
+        public void execute()
         {
-            _users.Remove(user);
+            Console.WriteLine("This is to be executed from a release branch");
         }
 
         public List<IUser> GetAllUsers()
@@ -63,7 +49,12 @@ namespace avansdevops
             return _users;
         }
 
-        public IUser GetUser(string fullName) 
+        public bool GetStatus()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IUser GetUser(string fullName)
         {
             return _users.Find(x => x.FullName == fullName);
         }
@@ -72,27 +63,27 @@ namespace avansdevops
         {
             return _users.Find(x => x.GetType() == type);
         }
-        
-        public ISprintStrategy GetStrategy()
+
+        public void RemoveBacklogItem(BacklogItem backlogItem)
         {
-            return _strategy;
+            _backlogItems.Remove(backlogItem);
         }
 
-        public bool GetStatus()
+        public void RemoveUser(IUser user)
         {
-            return _active;
-        }
-
-        public void SetStatus(bool status)
-        {
-            _active = status;
-            _sprintManager.SprintChanged(this);            
+            _users.Remove(user);
         }
 
         public void SendNotification(BacklogItem backlogItem, Type userType)
         {
             IUser user = GetUser(userType);
             _sprintManager.SendNotificationToUser(this, user, backlogItem);
+        }
+
+        public void SetStatus(bool status)
+        {
+            _status = status;
+            _sprintManager.SprintChanged(this);
         }
     }
 }
