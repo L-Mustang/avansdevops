@@ -2,17 +2,34 @@
 using FluentAssertions;
 using avansdevops;
 using avansdevops.BacklogItems;
+using avansdevops.User;
 
 namespace avansdevopsTests
 {
+
     [TestClass]
     public class ForumTests
     {
-        // Arrange
-        static Forum f1 = new Forum();
-        static BacklogItem backlogItem1 = new BacklogItem(1, "BacklogItem1", 1);
-        static ForumThread forumThread1 = new ForumThread("title1", backlogItem1);
-        static ForumPost forumPost1 = new ForumPost("Content1", 1);
+        Forum f1;
+        BacklogItem backlogItem1;
+        ForumThread forumThread1;
+        ForumPost forumPost1;
+
+        UserFactory devFactory = new DeveloperFactory("Dev", "developer", "dev@example.com");
+        IUser? dev;
+
+        [TestInitialize]
+        public void Setup()
+        {            
+            f1 = new Forum();
+            backlogItem1 = new BacklogItem(1, "BacklogItem1", dev);
+            forumThread1 = new ForumThread("title1", backlogItem1);
+            forumPost1 = new ForumPost("Content1", 1);
+
+            dev = devFactory.CreateUser();
+        }
+
+        
 
         [TestMethod]
         public void Test_ForumCreate()

@@ -1,4 +1,6 @@
-﻿    using avansdevops.BacklogItems.Actions;
+﻿using Action = avansdevops.BacklogItems.Actions.Action;
+using avansdevops.BacklogItems.Actions;
+using avansdevops.User;
 
 namespace avansdevops.BacklogItems
 {
@@ -12,16 +14,16 @@ namespace avansdevops.BacklogItems
         private IBacklogItemState _stateTodo;
 
         private IBacklogItemState _state;
-        private List<Actions.Action>? _actions;
+        private List<Action>? _actions;
 
         public BacklogItemManager _backlogItemManager;
 
         private int _backlogItemId { get; set; }
         private string _title { get; set; }
 
-        private int? _userId { get; set; }
+        private IUser? _user { get; set; }
 
-        public BacklogItem(int backlogItemId, string title, int? userId)
+        public BacklogItem(int backlogItemId, string title, IUser? user)
         {
             this._stateDone = new BacklogItemStateDone(this);
             this._stateTested = new BacklogItemStateTested(this);
@@ -36,14 +38,19 @@ namespace avansdevops.BacklogItems
 
             this._backlogItemManager = new BacklogItemManager();
 
-            _actions = new List<Actions.Action>();
+            _actions = new List<Action>();
 
-            if (userId != null)
-            {
-                _userId = userId;
-            }
+            _user = user;
 
             _backlogItemManager.Subscribe(new BacklogItemListener());
+        }
+
+        public IUser user
+        {
+            get { return _user;  }
+            set { if (value.GetType() == typeof(Developer))
+                    _user = value;
+                 }
         }
 
         public void SetState(IBacklogItemState state)
@@ -80,7 +87,7 @@ namespace avansdevops.BacklogItems
             }            
         }
 
-        public List<Actions.Action> GetActions()
+        public List<Action> GetActions()
         {
             return _actions;
         }

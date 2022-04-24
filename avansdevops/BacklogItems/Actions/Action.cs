@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using avansdevops.User;
+
 namespace avansdevops.BacklogItems.Actions
 {
     public class Action
@@ -15,9 +17,9 @@ namespace avansdevops.BacklogItems.Actions
         private int _actionId;
         private string _actionName { get; set; }
 
-        private int? _userId;
+        private IUser? _user;
 
-        public Action(int actionId, string actionName, int? userId)
+        public Action(int actionId, string actionName, IUser? user)
         {
             _actionId = actionId;
             _actionName = actionName;
@@ -26,10 +28,7 @@ namespace avansdevops.BacklogItems.Actions
             this._stateTodo = new ActionStateTodo(this);
             this._state = _stateTodo;
 
-            if (userId != null)
-            {
-                this._userId = userId;
-            }
+            _user = user;
         }
 
         public void SetState(IActionState state)
