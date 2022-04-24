@@ -37,7 +37,7 @@ namespace avansdevops
 
         public List<BacklogItem> AddBacklogItem(BacklogItem backlogItem)
         {
-            backlogItem.SendNotification = new System.Action(() => SendNotification(backlogItem));
+            backlogItem.SendNotification = new System.Action(() => SendNotification(backlogItem, typeof(ScrumMaster)));
             _backlogItems.Add(backlogItem);
             return _backlogItems;
         }
@@ -89,9 +89,9 @@ namespace avansdevops
             _sprintManager.SprintChanged(this);            
         }
 
-        public void SendNotification(BacklogItem backlogItem)
+        public void SendNotification(BacklogItem backlogItem, Type userType)
         {
-            IUser user = this.GetUser( typeof(ScrumMaster) );
+            IUser user = GetUser(userType);
             _sprintManager.SendNotificationToUser(this, user, backlogItem);
         }
     }

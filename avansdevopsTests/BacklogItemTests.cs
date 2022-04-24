@@ -123,7 +123,7 @@ namespace avansdevopsTests
 
             // Assert
             Trace.WriteLine(stringWriter.ToString());
-            stringWriter.ToString().Should().ContainAll("Slack","Smtp","BacklogItemStateDoing");
+            stringWriter.ToString().Should().ContainAll("Slack","Smtp","Doing");
         }
 
         [TestMethod]

@@ -62,7 +62,10 @@ namespace avansdevops.BacklogItems
             _backlogItemManager.BacklogItemStateChanged(this);
 
             if (state.GetType() == typeof(BacklogItemStateTodo)) {
-                this.SendNotification();
+                if(SendNotification != null)
+                {
+                    this.SendNotification();
+                }                
                 _backlogItemManager.BacklogItemStateChangedTodo(this);
             } 
 
