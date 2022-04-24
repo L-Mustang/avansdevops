@@ -48,7 +48,7 @@ public class BacklogItemManager : IManager
         }
     }
 
-    public void Sprint()
+    public void FinishBacklogItem()
     {
         foreach (IObserver<Sprint> listener in _listeners)
             listener.OnCompleted();
