@@ -156,7 +156,7 @@ namespace avansdevopsTests
             testItem1.SetState(testItem1.GetStateTodo());
 
             // Assert
-            Trace.WriteLine(stringWriter.ToString());
+            //Trace.WriteLine(stringWriter.ToString());
             stringWriter.ToString().Should().ContainAll("Smtp", testItem1.GetTitle(), "Todo");
         }
     }

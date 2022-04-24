@@ -55,8 +55,14 @@ namespace avansdevops.BacklogItems
 
         public void SetState(IBacklogItemState state)
         {
+
             _state = state;
             _backlogItemManager.BacklogItemStateChanged(this);
+
+            if (state.GetType() == typeof(BacklogItemStateTodo)) {
+                _backlogItemManager.BacklogItemStateChangedTodo(this);
+            } 
+
         }
 
         public IBacklogItemState GetState()
