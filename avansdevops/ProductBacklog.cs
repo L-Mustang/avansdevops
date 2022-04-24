@@ -16,6 +16,12 @@ namespace avansdevops
             _backlogItems = new List<BacklogItem>();
         }
 
+        public List<BacklogItem> BacklogItems
+        {
+            get { return _backlogItems; }
+            set { }
+        }
+
         public List<BacklogItem> AddBacklogItem(BacklogItem backlogItem)
         {
             _backlogItems.Add(backlogItem);
