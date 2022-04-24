@@ -149,7 +149,7 @@ namespace avansdevopsTests
         public void Test_SprintListenerSendNotification()
         {
             // Arrange
-            sprintFeedback._sprintManager.Subscribe(new SprintListener());
+            //sprintFeedback._sprintManager.Subscribe(new SprintListener());
 
             // Act
             sprintFeedback.SetStatus(false);
@@ -167,11 +167,12 @@ namespace avansdevopsTests
             sprintFeedback.AddBacklogItem(backlogItem);
 
             // Act
-            backlogItem.SetState(backlogItem.GetStateTodo());
+            sprintFeedback.GetAllBacklogItems()[0].SetState(backlogItem.GetStateTodo());
+            //backlogItem.SetState(backlogItem.GetStateTodo());
 
             // Assert
             Trace.WriteLine(stringWriter.ToString());
-            
+            stringWriter.ToString().Should().Contain("ScrumMaster");
         }
     }
 }

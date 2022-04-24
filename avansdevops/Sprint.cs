@@ -47,11 +47,6 @@ namespace avansdevops
             _backlogItems.Remove(backlogItem);
         }
 
-        public void SetBacklogItemState(BacklogItem item, IBacklogItemState state)
-        {
-            item.SetState(state);
-        }
-
         public List<IUser> AddUser(IUser user)
         {
             _users.Add(user);

@@ -47,9 +47,9 @@ namespace avansdevops
 
         public virtual void OnNext(Sprint sprint, IUser user, BacklogItem backlogItem)
         {
-            _message = $"To User: {user.Name}; BacklogItem {backlogItem.GetTitle()} has been set to state: {backlogItem.GetState().ToString().Substring(41)}";
+            _message = $"To {user.GetType().ToString()}; BacklogItem {backlogItem.GetTitle()} has been set to state: {backlogItem.GetState().ToString().Substring(41)}";
             
-             INotificationAdapter notificationServiceSmtp = new SmtpAdapter(new Lib.SMTP());
+            INotificationAdapter notificationServiceSmtp = new SmtpAdapter(new Lib.SMTP());
             INotificationAdapter notificationServiceSlack = new SlackAdapter(new Lib.SlackAPI());
             notificationServiceSlack.SendNotification(_message);
             notificationServiceSmtp.SendNotification(_message);
