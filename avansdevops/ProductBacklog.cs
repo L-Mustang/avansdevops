@@ -19,7 +19,6 @@ namespace avansdevops
         public List<BacklogItem> BacklogItems
         {
             get { return _backlogItems; }
-            set { }
         }
 
         public List<BacklogItem> AddBacklogItem(BacklogItem backlogItem)
