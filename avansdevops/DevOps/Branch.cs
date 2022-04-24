@@ -28,7 +28,7 @@ namespace avansdevops.DevOps
 
         public void Pull()
         {
-            Console.WriteLine("Pulling changes from origin");
+            Console.WriteLine("Pulled changes from origin");
         }
 
         public void Commit()
