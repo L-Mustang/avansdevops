@@ -19,7 +19,6 @@ namespace avansdevops
             _userId = userId;
 
             _id = RandomNumberGenerator.GetInt32(int.MaxValue);
-
         }
 
         public string GetContent()

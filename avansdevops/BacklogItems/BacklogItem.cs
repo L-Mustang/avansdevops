@@ -20,10 +20,10 @@ namespace avansdevops.BacklogItems
         public System.Action SendNotification;
         public BacklogItemManager _backlogItemManager;
 
-        private int _backlogItemId { get; set; }
-        private string _title { get; set; }
+        private int _backlogItemId;
+        private string _title;
 
-        private IUser? _user { get; set; }
+        private IUser? _user;
 
         public BacklogItem(int backlogItemId, string title, IUser? user)
         {

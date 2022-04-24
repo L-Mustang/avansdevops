@@ -26,7 +26,6 @@ namespace avansdevops
         {
             _backlogItems.Remove(backlogItem);
         }
-
         
     }
 }

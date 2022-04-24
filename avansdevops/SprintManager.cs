@@ -57,13 +57,6 @@ namespace avansdevops
             }
         }
 
-        public void Sprint()
-        {
-            foreach (IObserver<Sprint> listener in _listeners)
-                listener.OnCompleted();
-
-            _listeners.Clear();
-        }
     }
 
 }
