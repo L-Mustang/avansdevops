@@ -26,29 +26,9 @@ namespace avansdevops.DevOps
             Console.WriteLine("Deployed");
         }
 
-        public void Test(Branch branch, string tester)
+        public void Test(Branch branch, ITestingAdapter testingAdapter)
         {
-            ITestingAdapter? testingAdapter = null;
-            switch (tester)
-            {
-                case "NUnit":
-                    testingAdapter = new NUnitAdapter(new NUnit());
-                    Console.WriteLine("Finished all tests");
-                    break;
-
-                case "Selenium":
-                    testingAdapter = new SeleniumAdapter(new Selenium());
-                    Console.WriteLine("Finished all tests");
-                    break;
-
-                default:
-                    Console.WriteLine("Platform not found");
-                    break;
-            }
-            if (testingAdapter != null)
-            {
-                testingAdapter.Test(branch);
-            }
+            testingAdapter.Test(branch);
         }
 
         public void Build(Branch branch, BuildJobType buildJobType)
