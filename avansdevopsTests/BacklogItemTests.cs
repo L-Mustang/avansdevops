@@ -7,6 +7,7 @@ using avansdevops.BacklogItems.Actions;
 using System.IO;
 using System;
 using Action = avansdevops.BacklogItems.Actions.Action;
+using avansdevops.User;
 using System.Diagnostics;
 
 namespace avansdevopsTests
@@ -23,15 +24,22 @@ namespace avansdevopsTests
         BacklogItem? testItem1;
         BacklogItem? testItem2;
 
-        StringWriter stringWriter;
+        UserFactory devFactory = new DeveloperFactory("Dev", "developer", "dev@example.com");
+        UserFactory testFactory = new TesterFactory("Test", "Tester", "test@example.com");
+        IUser? dev;
+        IUser? tester;
+
+        StringWriter stringWriter = new StringWriter();
 
         [TestInitialize]
         public void Startup()
         {
-            testItem1 = new BacklogItem(id1, title1, 1);
-            testItem2 = new BacklogItem(id2, title2, 2);
+            dev = devFactory.CreateUser();
+            tester = testFactory.CreateUser();
 
-            stringWriter = new StringWriter();
+            testItem1 = new BacklogItem(id1, title1, dev);
+            testItem2 = new BacklogItem(id2, title2, dev);
+
             Console.SetOut(stringWriter);
         }
 
@@ -43,7 +51,7 @@ namespace avansdevopsTests
             int id = 1;
             
             // Act
-            BacklogItem backlogItem = new BacklogItem(id, title, 1);
+            BacklogItem backlogItem = new BacklogItem(id, title, dev);
 
             // Assert
             backlogItem.GetTitle().Should().Be(title);
@@ -77,7 +85,7 @@ namespace avansdevopsTests
         public void Test_AddAction()
         {
             // Arrange
-            Action action = new Action(1, "name", 1);
+            Action action = new Action(1, "name", dev);
 
             // Act
             testItem1.AddAction(action);
@@ -90,9 +98,9 @@ namespace avansdevopsTests
         public void Test_RemoveAction()
         {
             // Arrange
-            Action action1 = new Action(1, "name1", 1);
-            Action action2 = new Action(2, "name2", 2);
-            Action action3 = new Action(3, "name3", 3);
+            Action action1 = new Action(1, "name1", dev);
+            Action action2 = new Action(2, "name2", dev);
+            Action action3 = new Action(3, "name3", dev);
             testItem1.AddAction(action1);
             testItem1.AddAction(action2);
             testItem1.AddAction(action3);
@@ -115,7 +123,41 @@ namespace avansdevopsTests
 
             // Assert
             Trace.WriteLine(stringWriter.ToString());
-            stringWriter.ToString().Should().ContainAll("Slack","Smtp","BacklogItemStateDoing");
+            stringWriter.ToString().Should().ContainAll("Slack","Smtp","Doing");
+        }
+
+        [TestMethod]
+        public void Test_BacklogItemShouldHaveDeveloper()
+        {
+            // Act
+            testItem1.user = dev;
+
+            // Assert
+            testItem1.user.Should().Be(dev);
+        }
+
+        [TestMethod]
+        public void Test_BacklogItemUserShouldBeDev()
+        {
+            // Arrange
+            testItem1.user = dev;
+
+            // Act
+            testItem1.user = tester;
+
+            // Assert
+            testItem1.user.GetType().Should().Be(typeof(Developer));
+        }
+
+        [TestMethod]
+        public void Test_NotificationIfBacklogItemGetsTodoState()
+        {
+            // Act
+            testItem1.SetState(testItem1.GetStateTodo());
+
+            // Assert
+            //Trace.WriteLine(stringWriter.ToString());
+            stringWriter.ToString().Should().ContainAll("Smtp", testItem1.GetTitle(), "Todo");
         }
     }
 }

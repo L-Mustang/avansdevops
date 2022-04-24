@@ -17,21 +17,6 @@ namespace avansdevops.User
             _surname = surname;
             _email = email;
         }
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
-        public string Surname
-        {
-            get { return _surname; }
-            set { _surname = value; }
-        }
-        public string Email
-        {
-            get { return _email; }
-            set { _email = value; }
-        }
         public string FullName
         {
             get { return _name + " " + _surname; }

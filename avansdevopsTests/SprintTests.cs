@@ -19,7 +19,9 @@ namespace avansdevopsTests
         StringWriter stringWriter;
 
         UserFactory? factory;
+        UserFactory? scrumFactory;
         IUser? user;
+        IUser? scrumMaster;
 
         BacklogItem backlogItem;
 
@@ -35,7 +37,10 @@ namespace avansdevopsTests
             factory = new DeveloperFactory("Jan", "Jantjes", "mail@mail.com");
             user = factory.CreateUser();
 
-            backlogItem = new BacklogItem(1, "Writing main", 1);
+            scrumFactory = new ScrumMasterFactory("Scrum", "Master", "scrum.master@example.com");
+            scrumMaster = scrumFactory.CreateUser();
+
+            backlogItem = new BacklogItem(1, "Writing main", null);
         }
 
         [TestMethod]
@@ -144,7 +149,7 @@ namespace avansdevopsTests
         public void Test_SprintListenerSendNotification()
         {
             // Arrange
-            sprintFeedback._sprintManager.Subscribe(new SprintListener());
+            //sprintFeedback._sprintManager.Subscribe(new SprintListener());
 
             // Act
             sprintFeedback.SetStatus(false);
@@ -152,6 +157,22 @@ namespace avansdevopsTests
             // Assert
             //Trace.WriteLine(stringWriter.ToString());
             stringWriter.ToString().Should().ContainAll("sprint", "False", "Smtp", "Slack");
+        }
+
+        [TestMethod]
+        public void Test_ScrumMasterGetNotifiedOnItemTodo()
+        {
+            // Arrange
+            sprintFeedback.AddUser(scrumMaster);
+            sprintFeedback.AddBacklogItem(backlogItem);
+
+            // Act
+            sprintFeedback.GetAllBacklogItems()[0].SetState(backlogItem.GetStateTodo());
+            //backlogItem.SetState(backlogItem.GetStateTodo());
+
+            // Assert
+            Trace.WriteLine(stringWriter.ToString());
+            stringWriter.ToString().Should().Contain("ScrumMaster");
         }
     }
 }

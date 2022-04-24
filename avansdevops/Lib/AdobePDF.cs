@@ -10,7 +10,7 @@ namespace avansdevops.Lib
     {
         private string _formattedText;
 
-        public AdobePDF(string formattedText)
+        public AdobePDF(string formattedText = "")
         {
             _formattedText = formattedText;
         }

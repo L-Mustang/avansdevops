@@ -48,7 +48,15 @@ public class BacklogItemManager : IManager
         }
     }
 
-    public void Sprint()
+    public void BacklogItemStateChangedTodo(BacklogItem backlogItem)
+    {
+        foreach( IObserver<BacklogItem> listener in _listeners)
+        {
+            listener.OnNext(backlogItem);
+        }
+    }
+
+    public void FinishBacklogItem()
     {
         foreach (IObserver<Sprint> listener in _listeners)
             listener.OnCompleted();
