@@ -32,12 +32,12 @@ namespace avansdevops.DevOps
             switch (tester)
             {
                 case "NUnit":
-                    testingAdapter = new NUnitAdapter(new Lib.NUnit());
+                    testingAdapter = new NUnitAdapter(new NUnit());
                     Console.WriteLine("Finished all tests");
                     break;
 
                 case "Selenium":
-                    testingAdapter = new SeleniumAdapter(new Lib.Selenium());
+                    testingAdapter = new SeleniumAdapter(new Selenium());
                     Console.WriteLine("Finished all tests");
                     break;
 
