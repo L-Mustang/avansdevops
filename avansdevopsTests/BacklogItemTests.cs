@@ -148,5 +148,16 @@ namespace avansdevopsTests
             // Assert
             testItem1.user.GetType().Should().Be(typeof(Developer));
         }
+
+        [TestMethod]
+        public void Test_NotificationIfBacklogItemGetsTodoState()
+        {
+            // Act
+            testItem1.SetState(testItem1.GetStateTodo());
+
+            // Assert
+            //Trace.WriteLine(stringWriter.ToString());
+            stringWriter.ToString().Should().ContainAll("Smtp", testItem1.GetTitle(), "Todo");
+        }
     }
 }

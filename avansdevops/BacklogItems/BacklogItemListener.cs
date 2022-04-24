@@ -35,7 +35,7 @@ public class BacklogItemListener : IObserver<BacklogItem>
 
     public virtual void OnNext(BacklogItem backlogItem)
     {
-        _message = $"Your item has been set to {backlogItem.GetState()}";
+        _message = $"BacklogItem '{backlogItem.GetTitle()}' has been set to {backlogItem.GetState().ToString().Substring(41)}";
         INotificationAdapter notificationServiceSmtp = new SmtpAdapter(new Lib.SMTP());
         INotificationAdapter notificationServiceSlack = new SlackAdapter(new Lib.SlackAPI());
 

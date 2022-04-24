@@ -1,4 +1,6 @@
-﻿using System;
+﻿using avansdevops.BacklogItems;
+using avansdevops.User;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -44,6 +46,14 @@ namespace avansdevops
             foreach(IObserver<Sprint> listener in _listeners)
             {
                 listener.OnNext(sprint);
+            }
+        }
+
+        public void SendNotificationToUser(Sprint sprint, IUser user, BacklogItem backlogItem)
+        {
+            foreach(SprintListener listener in _listeners)
+            {
+                listener.OnNext(sprint, user, backlogItem);
             }
         }
 

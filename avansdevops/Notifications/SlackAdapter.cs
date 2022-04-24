@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using avansdevops.Lib;
+using avansdevops.User;
 
 namespace avansdevops.Notifications
 {
