@@ -10,30 +10,18 @@ namespace avansdevops.SprintReport
     public class SprintReport
     {
         private Sprint _sprint;
-        private DocumentType _documentType;
+        private IDocument _documentAdapter;
 
-        public SprintReport(Sprint sprint, DocumentType documentType)
+        public SprintReport(Sprint sprint, IDocument documentAdapter)
         {
             _sprint = sprint;
-            _documentType = documentType;
+            _documentAdapter = documentAdapter;
         }
 
         public bool createReportDocument()
         {
-            IDocument document;
-            string sprintString = _sprint.ToString();
-            switch (_documentType)
-            {
-                case DocumentType.Docx:
-                    document = new DocxAdapter(new WordAPI(sprintString));
-                    break;
-                case DocumentType.PDF:
-                    document = new PDFAdapter(new AdobePDF(sprintString));
-                    break;
-                default:
-                    return false;
-            }
-            return document.Export();
+            _documentAdapter.Text = _sprint.ToString();
+            return _documentAdapter.Export();
         }
     }
 }

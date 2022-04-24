@@ -10,7 +10,7 @@ namespace avansdevops.Lib
     {
         private string _rawText;
         
-        public WordAPI(string rawText)
+        public WordAPI(string rawText = "")
         {
             _rawText = rawText;
         }

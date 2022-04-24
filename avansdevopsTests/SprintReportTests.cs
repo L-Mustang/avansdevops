@@ -7,6 +7,7 @@ using avansdevops.BacklogItems;
 using avansdevops.SprintReport;
 using System.IO;
 using System;
+using avansdevops.Lib;
 
 namespace avansdevopsTests
 {
@@ -31,7 +32,7 @@ namespace avansdevopsTests
         {
             // Arrange
             // Act
-            SprintReport sprintReport = new SprintReport(sprint, DocumentType.Docx);
+            SprintReport sprintReport = new SprintReport(sprint, new DocxAdapter(new WordAPI()));
 
             // Assert
             sprintReport.createReportDocument().Should().BeTrue();
@@ -42,7 +43,7 @@ namespace avansdevopsTests
         {
             // Arrange
             // Act
-            SprintReport sprintReport = new SprintReport(sprint, DocumentType.PDF);
+            SprintReport sprintReport = new SprintReport(sprint, new PDFAdapter(new AdobePDF()));
 
             // Assert
             sprintReport.createReportDocument().Should().BeTrue();
@@ -53,7 +54,7 @@ namespace avansdevopsTests
         {
             // Arrange
             // Act
-            SprintReport sprintReport = new SprintReport(sprint, DocumentType.Docx);
+            SprintReport sprintReport = new SprintReport(sprint, new DocxAdapter(new WordAPI()));
             sprintReport.createReportDocument();
             // Assert
             stringWriter.ToString().Should().Contain("Docx");
@@ -64,7 +65,7 @@ namespace avansdevopsTests
         {
             // Arrange
             // Act
-            SprintReport sprintReport = new SprintReport(sprint, DocumentType.PDF);
+            SprintReport sprintReport = new SprintReport(sprint, new PDFAdapter(new AdobePDF()));
             sprintReport.createReportDocument();
             // Assert
             stringWriter.ToString().Should().Contain("PDF");
