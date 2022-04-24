@@ -31,37 +31,15 @@ namespace avansdevops.DevOps
             testingAdapter.Test(branch);
         }
 
-        public void Build(Branch branch, BuildJobType buildJobType)
+        public void Build(Branch branch, IBuildJobAdapter buildJobAdapter)
         {
-            IBuildJobAdapter buildJobAdapter;
-            switch (buildJobType)
-            {
-                case BuildJobType.DotNet:
-                    buildJobAdapter = new DotNetAdapter(new DotNet());
-                    break;
-                case BuildJobType.DotNetCore:
-                    buildJobAdapter = new DotNetCoreAdapter(new DotNetCore());
-                    break;
-                case BuildJobType.Ant:
-                    buildJobAdapter = new AntAdapter(new Ant());
-                    break;
-                case BuildJobType.Jenkins:
-                    buildJobAdapter = new JenkinsAdapter(new Jenkins());
-                    break;
-                case BuildJobType.Maven:
-                    buildJobAdapter = new MavenAdapter(new Maven());
-                    break;
-                default:
-                    return;
-            }
             buildJobAdapter.CreateBuildJob(branch);
-            return;
         }
 
         public void Analyse(Branch branch)
         {
             Console.WriteLine("Analysing...");
-            Console.WriteLine("Analysis completed. ");
+            Console.WriteLine("Analysis completed on branch {0}", branch.Name);
         }
     }
 
