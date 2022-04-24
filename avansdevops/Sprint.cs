@@ -15,7 +15,6 @@ namespace avansdevops
         private List<IUser> _users;
         private bool _active;
 
-
         public SprintManager _sprintManager;
         private ISprintStrategy _strategy;
 
@@ -27,6 +26,8 @@ namespace avansdevops
 
             _strategy = strategy;
             _sprintManager = new SprintManager();
+
+            _sprintManager.Subscribe(new SprintListener());
         }
 
         public List<BacklogItem> GetAllBacklogItems()
@@ -36,6 +37,7 @@ namespace avansdevops
 
         public List<BacklogItem> AddBacklogItem(BacklogItem backlogItem)
         {
+            backlogItem.SendNotification = new System.Action(() => SendNotification(backlogItem));
             _backlogItems.Add(backlogItem);
             return _backlogItems;
         }
@@ -70,6 +72,11 @@ namespace avansdevops
         {
             return _users.Find(x => x.FullName == fullName);
         }
+
+        public IUser GetUser(Type type)
+        {
+            return _users.Find(x => x.GetType() == type);
+        }
         
         public ISprintStrategy GetStrategy()
         {
@@ -85,6 +92,12 @@ namespace avansdevops
         {
             _active = status;
             _sprintManager.SprintChanged(this);            
+        }
+
+        public void SendNotification(BacklogItem backlogItem)
+        {
+            IUser user = this.GetUser( typeof(ScrumMaster) );
+            _sprintManager.SendNotificationToUser(this, user, backlogItem);
         }
     }
 }

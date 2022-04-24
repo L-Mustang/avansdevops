@@ -1,4 +1,5 @@
 ﻿using Action = avansdevops.BacklogItems.Actions.Action;
+using System;
 using avansdevops.BacklogItems.Actions;
 using avansdevops.User;
 
@@ -16,6 +17,7 @@ namespace avansdevops.BacklogItems
         private IBacklogItemState _state;
         private List<Action>? _actions;
 
+        public System.Action SendNotification;
         public BacklogItemManager _backlogItemManager;
 
         private int _backlogItemId { get; set; }
@@ -60,6 +62,7 @@ namespace avansdevops.BacklogItems
             _backlogItemManager.BacklogItemStateChanged(this);
 
             if (state.GetType() == typeof(BacklogItemStateTodo)) {
+                this.SendNotification();
                 _backlogItemManager.BacklogItemStateChangedTodo(this);
             } 
 
