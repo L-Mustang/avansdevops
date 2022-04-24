@@ -7,14 +7,9 @@ namespace avansdevops.BacklogItems
 {
     public class BacklogItem
     {
-        private IBacklogItemState _stateDone;
-        private IBacklogItemState _stateTested;
-        private IBacklogItemState _stateTesting;
-        private IBacklogItemState _stateReadyForTesting;
-        private IBacklogItemState _stateDoing;
-        private IBacklogItemState _stateTodo;
+       
 
-        private IBacklogItemState _state;
+        private BacklogItemStatus _status;
         private List<Action>? _actions;
 
         public System.Action SendNotification;
@@ -27,13 +22,7 @@ namespace avansdevops.BacklogItems
 
         public BacklogItem(int backlogItemId, string title, IUser? user)
         {
-            this._stateDone = new BacklogItemStateDone(this);
-            this._stateTested = new BacklogItemStateTested(this);
-            this._stateTesting = new BacklogItemStateTesting(this);
-            this._stateReadyForTesting = new BacklogItemStateReadyForTesting(this);
-            this._stateDoing = new BacklogItemStateDoing(this);
-            this._stateTodo = new BacklogItemStateTodo(this);
-            this._state = _stateTodo;
+            this._status = BacklogItemStatus.Todo;
 
             this._backlogItemId = backlogItemId;
             this._title = title;
@@ -55,13 +44,13 @@ namespace avansdevops.BacklogItems
                  }
         }
 
-        public void SetState(IBacklogItemState state)
+        public void SetState(BacklogItemStatus state)
         {
 
-            _state = state;
+            _status = state;
             _backlogItemManager.BacklogItemStateChanged(this);
 
-            if (state.GetType() == typeof(BacklogItemStateTodo)) {
+            if (state == BacklogItemStatus.Todo) {
                 if(SendNotification != null)
                 {
                     this.SendNotification();
@@ -71,9 +60,9 @@ namespace avansdevops.BacklogItems
 
         }
 
-        public IBacklogItemState GetState()
+        public BacklogItemStatus GetState()
         {
-            return this._state;
+            return this._status;
         }
 
         public void AddAction(Actions.Action action)
@@ -112,36 +101,6 @@ namespace avansdevops.BacklogItems
         public int GetId()
         {
             return _backlogItemId;
-        }
-
-        public IBacklogItemState GetStateDone()
-        {
-            return _stateDone;
-        }
-
-        public IBacklogItemState GetStateDoing()
-        {
-            return _stateDoing;
-        }
-
-        public IBacklogItemState GetStateReadyForTesting()
-        {
-            return _stateReadyForTesting;
-        }
-
-        public IBacklogItemState GetStateTesting()
-        {
-            return _stateTesting;
-        }
-
-        public IBacklogItemState GetStateTested()
-        {
-            return _stateTested;
-        }
-
-        public IBacklogItemState GetStateTodo()
-        {
-            return _stateTodo;
         }
     }
 }
