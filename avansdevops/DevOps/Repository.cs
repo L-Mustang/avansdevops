@@ -34,7 +34,7 @@ namespace avansdevops.DevOps
             return _branches;
         }
 
-        public Branch? GetUser(string branchName)
+        public Branch? GetBranch(string branchName)
         {
             return _branches.Find(x => x.Name == branchName);
         }
