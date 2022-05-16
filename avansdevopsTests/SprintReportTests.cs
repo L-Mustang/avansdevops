@@ -25,6 +25,7 @@ namespace avansdevopsTests
 
             stringWriter = new StringWriter();
             Console.SetOut(stringWriter);
+            // Test comment
         }
 
         [TestMethod]
